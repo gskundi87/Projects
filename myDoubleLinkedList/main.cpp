@@ -8,5 +8,7 @@ int main()
 
     std::cout << (b > a) << '\n';
 
+    std::cout << a << " " << b << '\n';
+
     return 0;
 }

@@ -1,6 +1,9 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <iostream>
+#include <cstdlib>
+
 template <typename U>
 class node
 {
@@ -25,6 +28,9 @@ public:
 
     template <typename V>
     friend bool operator==(const node<V>&, const node<V>&);
+
+    template <typename V>
+    friend std::ostream& operator<<(std::ostream&, const node<V>&);
 
 private:
     U data;
@@ -63,6 +69,38 @@ template <typename V>
 bool operator>(const node<V>& x, const node<V>& y)
 {
     return x.data > y.data;
+}
+
+template <typename V>
+bool operator<(const node<V>& x, const node<V>& y)
+{
+    return x.data < y.data;
+}
+
+template <typename V>
+bool operator>=(const node<V>& x, const node<V>& y)
+{
+    return x.data >= y.data;
+}
+
+template <typename V>
+bool operator<=(const node<V>& x, const node<V>& y)
+{
+    return x.data <= y.data;
+}
+
+template <typename V>
+bool operator==(const node<V>& x, const node<V>& y)
+{
+    return x.data == y.data;
+}
+
+template <typename V>
+std::ostream& operator<<(std::ostream& out, const node<V>& x)
+{
+    out << x.data;
+
+    return out;
 }
 
 template <typename U>
