@@ -7,11 +7,11 @@ public:
 	DLLNode() {
 		next = prev = nullptr;
 	}
-    DLLNode(const T& el, DLLNode *n = nullptr, DLLNode *p = nullptr) {
+    DLLNode(const T& el, DLLNode<T> *n = nullptr, DLLNode<T> *p = nullptr) {
         info = el; next = n; prev = p;
     }
     T info;
-    DLLNode *next, *prev;
+    DLLNode<T> *next, *prev;
 };
 
 template<class T>
