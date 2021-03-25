@@ -9,7 +9,8 @@ class node
 {
 public:
     node() : data{U()}, next{nullptr}, previous{nullptr}{}
-    node(U d): data{d}, next{nullptr}, previous{nullptr}{}
+    node(const U& d): data{d}, next{nullptr}, previous{nullptr}{}
+    node(const U& d, node<U>* n, node<U>* p): data{d}, next{n}, previous{p}{}
     node(const node<U>&);
     ~node();
     node<U>& operator=(const node<U>&);
@@ -32,7 +33,6 @@ public:
     template <typename V>
     friend std::ostream& operator<<(std::ostream&, const node<V>&);
 
-private:
     U data;
     node* next;
     node* previous;
