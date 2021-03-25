@@ -1,0 +1,26 @@
+struct Node {
+    Node *next_, *prev_;
+
+    Node() 
+        : next_(this), prev_(this)
+    {}
+
+    ~Node() { 
+        unlink();
+    }
+
+    void push_back(Node* n) {
+        n->next_ = this;
+        n->prev_ = prev_;
+        prev_->next_ = n;
+        prev_ = n;
+    }
+
+    void unlink() {
+        Node *next = next_, *prev = prev_;
+        next->prev_ = prev;
+        prev->next_ = next;
+        next_ = this;
+        prev_ = this;
+    }
+};

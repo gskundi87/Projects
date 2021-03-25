@@ -14,6 +14,8 @@ public:
     myDoubleLinkedList<T>& operator=(const myDoubleLinkedList<T>&);
 
 
+
+
 private:
   node<T>* head;
   node<T>* tail;
@@ -26,7 +28,7 @@ private:
 template <typename T>
 myDoubleLinkedList<T>::myDoubleLinkedList(T d)
 {
-    head = new T(d);
+    head = new node<T>(d);
     tail = head;
     ++_size;
 }
