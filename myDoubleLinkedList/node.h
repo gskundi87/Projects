@@ -15,6 +15,13 @@ public:
     ~node();
     node<U>& operator=(const node<U>&);
 
+    U data;
+    node* next;
+    node* previous;
+
+    void copy(const node<U>&);
+    void del();
+
     template <typename V>
     friend bool operator>(const node<V>&, const node<V>&);
 
@@ -30,15 +37,8 @@ public:
     template <typename V>
     friend bool operator==(const node<V>&, const node<V>&);
 
-    template <typename V>
-    friend std::ostream& operator<<(std::ostream&, const node<V>&);
-
-    U data;
-    node* next;
-    node* previous;
-
-    void copy(const node<U>&);
-    void del();
+    template <typename T>
+    friend std::ostream& operator<<(std::ostream&, const node<T>&);
 };
 
 template<typename U>
@@ -63,6 +63,22 @@ node<U>& node<U>::operator=(const node<U>& other)
     }
 
     return *this;
+}
+
+template <typename U>
+void node<U>::copy(const node<U>& other)
+{
+    data = other.data;
+    next = other.next;
+    previous = other.previous;
+}
+
+template <typename U>
+void node<U>::del()
+{
+    data = U();
+    next = nullptr;
+    previous = nullptr;
 }
 
 template <typename V>
@@ -95,28 +111,12 @@ bool operator==(const node<V>& x, const node<V>& y)
     return x.data == y.data;
 }
 
-template <typename V>
-std::ostream& operator<<(std::ostream& out, const node<V>& x)
+template <typename U>
+std::ostream& operator<<(std::ostream& out, const node<U>& x)
 {
     out << x.data;
 
     return out;
-}
-
-template <typename U>
-void node<U>::copy(const node<U>& other)
-{
-    data = other.data;
-    next = other.next;
-    previous = other.previous;
-}
-
-template <typename U>
-void node<U>::del()
-{
-    data = U();
-    next = nullptr;
-    previous = nullptr;
 }
 
 #endif // NODE_H

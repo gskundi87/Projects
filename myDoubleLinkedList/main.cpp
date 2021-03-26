@@ -33,5 +33,14 @@ int main()
 
     std::cout << '\n';
 
+    for (int i = 4; i >= 0; --i)
+    {
+        B.pop_back();
+    }
+
+    std::cout << B;
+
+    std::cout << '\n';
+
     return 0;
 }

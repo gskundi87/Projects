@@ -22,6 +22,8 @@ public:
 
     void push_front(const T&);
     void push_back(const T&);
+    void pop_front();
+    void pop_back();
 
 private:
   node<T>* head;
@@ -33,6 +35,17 @@ private:
 
   template <typename T2>
   friend std::ostream& operator<<(std::ostream&, const myDoubleLinkedList<T2>&);
+
+  class iterator
+  {
+      friend class myDoubleLinkedList;
+
+  public:
+
+  private:
+      node<T>* nodePtr;
+
+  };
 };
 
 template <typename T>
@@ -121,6 +134,48 @@ void myDoubleLinkedList<T>::push_back(const T&d)
     }
 
     ++_size;
+}
+
+template <typename T>
+void myDoubleLinkedList<T>::pop_front()
+{
+    if(!is_empty())
+    {
+        if(_size == 1)
+        {
+            delete head;
+            head = tail = nullptr;
+            --_size;
+        }
+        else
+        {
+            head = head->next;
+            delete head->previous;
+            head->previous = nullptr;
+            --_size;
+        }
+    }
+}
+
+template <typename T>
+void myDoubleLinkedList<T>::pop_back()
+{
+    if(!is_empty())
+    {
+        if(_size == 1)
+        {
+            delete tail;
+            head = tail = nullptr;
+            --_size;
+        }
+        else
+        {
+            tail = tail->previous;
+            delete tail->next;
+            tail->next = nullptr;
+            --_size;
+        }
+    }
 }
 
 template <typename T>
