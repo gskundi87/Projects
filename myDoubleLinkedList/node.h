@@ -2,7 +2,6 @@
 #define NODE_H
 
 #include <iostream>
-#include <cstdlib>
 
 template <typename U>
 class node

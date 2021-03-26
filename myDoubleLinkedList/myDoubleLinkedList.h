@@ -9,6 +9,78 @@ template <typename T>
 class myDoubleLinkedList
 {
 public:
+    class iterator
+    {
+        friend class myDoubleLinkedList;
+
+    public:
+        iterator() : nodePtr(nullptr){}
+        ~iterator() {nodePtr = nullptr;}
+
+        iterator& operator=(const iterator& itr)
+        {
+            nodePtr = itr.nodePtr;
+        }
+
+        bool operator==(const iterator& other) const
+        {
+            return (nodePtr == other.nodePtr);
+        }
+
+        bool operator!=(const iterator& other) const
+        {
+            return (nodePtr != other.nodePtr);
+        }
+
+        T& operator*() const
+        {
+            return nodePtr->data;
+        }
+
+        iterator operator++()
+        {
+            if(nodePtr->next)
+                nodePtr = nodePtr->next;
+
+            return *this;
+        }
+
+        iterator operator++(int)
+        {
+            iterator temp = *this;
+
+            if(nodePtr->next)
+                nodePtr = nodePtr->next;
+
+            return temp;
+        }
+
+        iterator operator--()
+        {
+            if(nodePtr->previous)
+                nodePtr = nodePtr->previous;
+
+            return *this;
+        }
+
+        iterator operator--(int)
+        {
+            iterator temp = *this;
+
+            if(nodePtr->previous)
+                nodePtr = nodePtr->previous;
+
+            return temp;
+        }
+
+    private:
+        node<T>* nodePtr;
+
+        iterator(node<T>* nP) : nodePtr(nP){}
+    };
+
+
+public:
     myDoubleLinkedList() : head{nullptr}, tail{nullptr}{}
     myDoubleLinkedList(const T&);
     myDoubleLinkedList(const myDoubleLinkedList<T>&);
@@ -24,6 +96,8 @@ public:
     void push_back(const T&);
     void pop_front();
     void pop_back();
+    iterator begin() {return iterator(head);}
+    iterator end() {return iterator(tail);}
 
 private:
   node<T>* head;
@@ -35,17 +109,6 @@ private:
 
   template <typename T2>
   friend std::ostream& operator<<(std::ostream&, const myDoubleLinkedList<T2>&);
-
-  class iterator
-  {
-      friend class myDoubleLinkedList;
-
-  public:
-
-  private:
-      node<T>* nodePtr;
-
-  };
 };
 
 template <typename T>

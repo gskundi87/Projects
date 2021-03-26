@@ -42,5 +42,13 @@ int main()
 
     std::cout << '\n';
 
+    myDoubleLinkedList<int>::iterator itr1 = B.begin();
+
+    myDoubleLinkedList<int>::iterator itr2 = A.end();
+
+    itr1++;
+
+    ++itr2;
+
     return 0;
 }
