@@ -16,66 +16,18 @@ public:
     public:
         iterator() : nodePtr(nullptr){}
         ~iterator() {nodePtr = nullptr;}
+        iterator& operator=(const iterator& other);
 
-        iterator& operator=(const iterator& itr)
-        {
-            nodePtr = itr.nodePtr;
-        }
-
-        bool operator==(const iterator& other) const
-        {
-            return (nodePtr == other.nodePtr);
-        }
-
-        bool operator!=(const iterator& other) const
-        {
-            return (nodePtr != other.nodePtr);
-        }
-
-        T& operator*() const
-        {
-            return nodePtr->data;
-        }
-
-        iterator operator++()
-        {
-            if(nodePtr->next)
-                nodePtr = nodePtr->next;
-
-            return *this;
-        }
-
-        iterator operator++(int)
-        {
-            iterator temp = *this;
-
-            if(nodePtr->next)
-                nodePtr = nodePtr->next;
-
-            return temp;
-        }
-
-        iterator operator--()
-        {
-            if(nodePtr->previous)
-                nodePtr = nodePtr->previous;
-
-            return *this;
-        }
-
-        iterator operator--(int)
-        {
-            iterator temp = *this;
-
-            if(nodePtr->previous)
-                nodePtr = nodePtr->previous;
-
-            return temp;
-        }
+        bool operator==(const iterator& other) const;
+        bool operator!=(const iterator& other) const;
+        T& operator*() const;
+        iterator operator++();
+        iterator operator++(int);
+        iterator operator--();
+        iterator operator--(int);
 
     private:
         node<T>* nodePtr;
-
         iterator(node<T>* nP) : nodePtr(nP){}
     };
 
@@ -96,8 +48,8 @@ public:
     void push_back(const T&);
     void pop_front();
     void pop_back();
-    iterator begin() {return iterator(head);}
-    iterator end() {return iterator(tail);}
+    iterator begin();
+    iterator end();
 
 private:
   node<T>* head;
@@ -242,6 +194,18 @@ void myDoubleLinkedList<T>::pop_back()
 }
 
 template <typename T>
+typename myDoubleLinkedList<T>::iterator myDoubleLinkedList<T>::begin()
+{
+    return myDoubleLinkedList<T>::iterator(head);
+}
+
+template <typename T>
+typename myDoubleLinkedList<T>::iterator myDoubleLinkedList<T>::end()
+{
+    return myDoubleLinkedList<T>::iterator(tail);
+}
+
+template <typename T>
 void myDoubleLinkedList<T>::copy(const myDoubleLinkedList<T>& other)
 {
 
@@ -276,6 +240,70 @@ std::ostream& operator<<(std::ostream& out, const myDoubleLinkedList<T2>& list)
     }
 
     return out;
+}
+
+template <typename T>
+typename myDoubleLinkedList<T>::iterator& myDoubleLinkedList<T>::iterator::operator=(const myDoubleLinkedList<T>::iterator& other)
+{
+    nodePtr = other.nodePtr;
+}
+
+template <typename T>
+bool myDoubleLinkedList<T>::iterator::operator==(const myDoubleLinkedList<T>::iterator& other) const
+{
+    return (nodePtr == other.nodePtr);
+}
+
+template <typename T>
+bool myDoubleLinkedList<T>::iterator::operator!=(const myDoubleLinkedList<T>::iterator& other) const
+{
+    return (nodePtr != other.nodePtr);
+}
+
+template <typename T>
+T& myDoubleLinkedList<T>::iterator::operator*() const
+{
+    return nodePtr->data;
+}
+
+template <typename T>
+typename myDoubleLinkedList<T>::iterator myDoubleLinkedList<T>::iterator::operator++()
+{
+    if(nodePtr->next)
+        nodePtr = nodePtr->next;
+
+    return *this;
+}
+
+template <typename T>
+typename myDoubleLinkedList<T>::iterator myDoubleLinkedList<T>::iterator::operator++(int)
+{
+    iterator temp = *this;
+
+    if(nodePtr->next)
+        nodePtr = nodePtr->next;
+
+    return temp;
+}
+
+template <typename T>
+typename myDoubleLinkedList<T>::iterator myDoubleLinkedList<T>::iterator::operator--()
+{
+    if(nodePtr->previous)
+        nodePtr = nodePtr->previous;
+
+    return *this;
+}
+
+template <typename T>
+typename myDoubleLinkedList<T>::iterator myDoubleLinkedList<T>::iterator::operator--(int)
+{
+    iterator temp = *this;
+
+    if(nodePtr->previous)
+        nodePtr = nodePtr->previous;
+
+    return temp;
 }
 
 #endif // MYDOUBLELINKEDLIST_H

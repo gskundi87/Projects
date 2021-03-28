@@ -46,9 +46,17 @@ int main()
 
     myDoubleLinkedList<int>::iterator itr2 = A.end();
 
+    std::cout << *itr1 << '\n';
+
+    std::cout << *itr2 << '\n';
+
     itr1++;
 
-    ++itr2;
+    --itr2;
+
+    std::cout << *itr1 << '\n';
+
+    std::cout << *itr2 << '\n';
 
     return 0;
 }
