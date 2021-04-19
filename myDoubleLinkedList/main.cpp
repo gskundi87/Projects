@@ -29,32 +29,42 @@ int main()
         B.push_back(i);
     }
 
-    std::cout << B;
+    myDoubleLinkedList<int> C = myDoubleLinkedList<int>(0);
 
-    std::cout << '\n';
-
-    for (int i = 4; i >= 0; --i)
+    for (int i = 1; i < 10; ++i)
     {
-        B.pop_back();
+        C.push_back(i);
     }
-
-    std::cout << B;
-
-    std::cout << '\n';
 
     myDoubleLinkedList<int>::iterator itr1 = B.begin();
 
-    myDoubleLinkedList<int>::iterator itr2 = A.end();
+    myDoubleLinkedList<int>::iterator itr2 = C.end();
+
+    std::cout << B;
+
+    std::cout << '\n';
 
     std::cout << *itr1 << '\n';
+
+    std::cout << *(itr1++) << '\n';
+
+    std::cout << *itr1 << '\n';
+
+    std::cout << *(++itr1) << '\n';
+
+    std::cout << *itr1 << '\n';
+
+    std::cout << C;
+
+    std::cout << '\n';
 
     std::cout << *itr2 << '\n';
 
-    itr1++;
+    std::cout << *(itr2--) << '\n';
 
-    --itr2;
+    std::cout << *itr2 << '\n';
 
-    std::cout << *itr1 << '\n';
+    std::cout << *(--itr2) << '\n';
 
     std::cout << *itr2 << '\n';
 
