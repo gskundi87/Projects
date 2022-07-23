@@ -52,15 +52,15 @@ public:
     iterator end();
 
 private:
-  node<T>* head;
-  node<T>* tail;
-  size_t _size = 0;
+    node<T>* head;
+    node<T>* tail;
+    size_t _size = 0;
 
-  void copy(const myDoubleLinkedList<T>&);
-  void del();
+    void copy(const myDoubleLinkedList<T>&);
+    void del();
 
-  template <typename T2>
-  friend std::ostream& operator<<(std::ostream&, const myDoubleLinkedList<T2>&);
+    template <typename T2>
+    friend std::ostream& operator<<(std::ostream&, const myDoubleLinkedList<T2>&);
 };
 
 template <typename T>

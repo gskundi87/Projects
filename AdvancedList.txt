@@ -26,10 +26,7 @@ protected:
     }
 
 public:
-    Node()
-        : next_(this), prev_(this)
-    {}
-
+    Node(): next_(this), prev_(this){}
     ~Node() { unlink(); }
 };
 
