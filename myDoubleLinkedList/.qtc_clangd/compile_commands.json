@@ -3,7 +3,7 @@
     "arguments": [
         "clang",
         "-I",
-        "C:\\Users\\p4u1\\AppData\\Local\\Temp\\QtCreator-LjdLLm\\clang-uiheader-nfyDdJ",
+        "C:\\Users\\p4u1\\AppData\\Local\\Temp\\QtCreator-vBxbQN\\clang-uiheader-jQtXlH",
         "-nostdinc",
         "-nostdinc++",
         "--driver-mode=cl",
@@ -88,7 +88,7 @@
     "arguments": [
         "clang",
         "-I",
-        "C:\\Users\\p4u1\\AppData\\Local\\Temp\\QtCreator-LjdLLm\\clang-uiheader-nfyDdJ",
+        "C:\\Users\\p4u1\\AppData\\Local\\Temp\\QtCreator-vBxbQN\\clang-uiheader-jQtXlH",
         "-nostdinc",
         "-nostdinc++",
         "--driver-mode=cl",
@@ -173,7 +173,7 @@
     "arguments": [
         "clang",
         "-I",
-        "C:\\Users\\p4u1\\AppData\\Local\\Temp\\QtCreator-LjdLLm\\clang-uiheader-nfyDdJ",
+        "C:\\Users\\p4u1\\AppData\\Local\\Temp\\QtCreator-vBxbQN\\clang-uiheader-jQtXlH",
         "-nostdinc",
         "-nostdinc++",
         "--driver-mode=cl",

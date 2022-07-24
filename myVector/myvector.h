@@ -3,48 +3,68 @@
 
 #include <cstdlib>
 
-enum myVectorError {OUT_OF_BOUNDS};
+enum myVectorError {OUT_OF_BOUNDS, EMPTY_VECTOR, INVALID_SIZE};
 
 template <class T>
 class myVector
 {
 public:
-    myVector(const T& initalValue = T(), const size_t& s = 0);
+    myVector(const T& initalValue = T(), const int& s = 0);
     ~myVector();
     myVector(const myVector<T>&);
     const myVector& operator=(const myVector<T>&);
-    const size_t& _size() const;
+    const int& _size() const;
     bool empty() const;
     bool full() const;
     void push_back(const T&);
     void pop_back();
-    void resize(const size_t&, const T& value = T());
-    const T& at(const size_t&) const;
+    void resize(const int&, const T& value = T());
+    const T& at(const int&) const;
     void clear();
-    T& operator[](const size_t&);
+    T& operator[](const int &);
 
 private:
     T* vectorArray;
-    size_t size;
-    size_t capacity = 256;
+    int size;
+    int capacity{256};
     void copy(const myVector<T>&);
-    void reallocate(const size_t&);
+    void reallocate(const int &);
 };
 
 template <class T>
-myVector<T>::myVector(const T& initialValue, const size_t& s)
+myVector<T>::myVector(const T& initialValue, const int &s)
 {
+    try
+    {
+        if(s < 0)
+            throw(0);
+    }
+    catch (int error)
+    {
+        switch(error)
+        {
+        case 0:
+            exit(INVALID_SIZE);
+            break;
+        default:
+            break;
+        }
+    }
+
     size = s;
 
     if(size > capacity)
         capacity = size * 2;
 
-    vectorArray = new T[capacity + 1];
+    vectorArray = new T[capacity];
 
-    vectorArray[0] = T();
-
-    for(size_t i = 1; i < size + 1; ++i)
+    for(int i{0}; i < size; ++i)
         vectorArray[i] = initialValue;
+
+    for(int i{size}; i < capacity; ++i)
+    {
+        vectorArray[i] = T();
+    }
 }
 
 template<class T>
@@ -74,7 +94,7 @@ const myVector<T>& myVector<T>::operator=(const myVector<T>& other)
 }
 
 template <class T>
-const size_t &myVector<T>::_size() const
+const int &myVector<T>::_size() const
 {
     return size;
 }
@@ -97,54 +117,81 @@ void myVector<T>::push_back(const T& value)
     if(full())
         reallocate(capacity * 2);
 
-    vectorArray[size + 1] = value;
-
-    ++size;
+    vectorArray[size++] = value;
 }
 
 template <class T>
 void myVector<T>::pop_back()
 {
-    if(empty())
-        return;
+    try
+    {
+        if(empty())
+            throw(0);
+    }
+    catch (int error)
+    {
+        switch(error)
+        {
+        case 0:
+            exit(EMPTY_VECTOR);
+            break;
+        default:
+            break;
+        }
+    }
 
-    vectorArray[size + 1] = T();
-
-    --size;
+    vectorArray[size--] = T();
 
     if(capacity > 256 && (capacity / 4) > size)
         reallocate(capacity / 2);
 }
 
 template <class T>
-void myVector<T>::resize(const size_t& newsize, const T& value)
+void myVector<T>::resize(const int &newsize, const T& value)
 {
+    try
+    {
+        if(newsize < 0)
+            throw(0);
+    }
+    catch (int error)
+    {
+        switch(error)
+        {
+        case 0:
+            exit(INVALID_SIZE);
+            break;
+        default:
+            break;
+        }
+    }
+
     if(newsize > capacity)
         reallocate(newsize * 2);
 
     if(newsize > size)
-        for(size_t i = size + 1; i < newsize + 1; ++i)
+        for(int i{size}; i < newsize; ++i)
             vectorArray[i] = value;
     else
-        for(size_t i = newsize + 1; i < size + 1; ++i)
+        for(int i{newsize}; i < size; ++i)
             vectorArray[i] = T();
 
     size = newsize;
 }
 
 template <class T>
-const T& myVector<T>::at(const size_t& index) const
+const T& myVector<T>::at(const int &index) const
 {
-    return vectorArray[index + 1];
+    return vectorArray[index];
 }
 
 template <class T>
-T& myVector<T>::operator[](const size_t& index)
+T& myVector<T>::operator[](const int& index)
 {
     try
     {
         if(index >= size)
-            throw 0;
+            throw(0);
     }
     catch(int error)
     {
@@ -158,13 +205,13 @@ T& myVector<T>::operator[](const size_t& index)
         }
     }
 
-    return vectorArray[index + 1];
+    return vectorArray[index];
 }
 
 template <class T>
 void myVector<T>::clear()
 {
-    for(size_t i = 1; i < size + 1; ++i)
+    for(int i{0}; i < size; ++i)
         vectorArray[i] = T();
 
     size = 0;
@@ -174,27 +221,28 @@ template <class T>
 void myVector<T>::copy(const myVector<T>& other)
 {
     size = other.size;
+    capacity = other.capacity;
 
-    vectorArray = new T[size + 1];
+    vectorArray = new T[capacity];
 
-    for(size_t i = 0; i < size + 1; ++i)
+    for(int i{0}; i < capacity; ++i)
         vectorArray[i] = other.vectorArray[i];
 }
 
 template <class T>
-void myVector<T>::reallocate(const size_t& allocation)
+void myVector<T>::reallocate(const int& allocation)
 {
     capacity = allocation;
 
-    T* temp = new T[capacity + 1];
+    T* temp {new T[capacity]};
 
-    for(size_t i = 0; i < size + 1; ++i)
+    for(int i{0}; i < size; ++i)
     {
         temp[i] = vectorArray[i];
         vectorArray[i] = T();
     }
 
-    for(size_t i = size + 1; i < capacity + 1; ++i)
+    for(int i{size}; i < capacity; ++i)
         temp[i] = T();
 
     delete [] vectorArray;
