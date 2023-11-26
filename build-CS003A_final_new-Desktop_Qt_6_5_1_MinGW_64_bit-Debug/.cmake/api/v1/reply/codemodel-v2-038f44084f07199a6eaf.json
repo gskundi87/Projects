@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-6c108633e9569a312a59.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "CS003A_final_new",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "CS003A_final_new::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CS003A_final_new-Debug-e6f39331d4744674d35b.json",
+					"name" : "CS003A_final_new",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "CS003A_final_new_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CS003A_final_new_autogen-Debug-96eeb52f6dc5056f13ba.json",
+					"name" : "CS003A_final_new_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "CS003A_final_new_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CS003A_final_new_autogen_timestamp_deps-Debug-18fed88f004b5baa6ea5.json",
+					"name" : "CS003A_final_new_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/p4u1/Documents/MIT_Projects/Projects/build-CS003A_final_new-Desktop_Qt_6_5_1_MinGW_64_bit-Debug",
+		"source" : "C:/Users/p4u1/Documents/MIT_Projects/Projects/CS003A_final_new"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
