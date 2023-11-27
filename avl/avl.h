@@ -2,7 +2,6 @@
 #define AVL_H
 
 #include "node.h"
-#include <cassert>
 
 template<typename T>
 class AVL
@@ -64,18 +63,19 @@ bool AVL<T>::insert(const T& data)
 }
 
 template<typename T>
-bool remove(const T& data)
+bool AVL<T>::remove(const T& data)
 {
 
 }
 
 template<typename T>
-Node<T>* AVL<T>::getRoot() const {
+Node<T>* AVL<T>::getRoot() const
+{
     return root;
 }
 
 template<typename T>
-Node<T>* find(const T& value, Node<T>* node)
+Node<T>* AVL<T>::find(const T& value, Node<T>* node) const
 {
     if(value != nullptr || node != nullptr)
     {
@@ -109,6 +109,38 @@ Node<T>* find(const T& value, Node<T>* node)
                 break;
             }
         }
+    }
+
+    return node;
+}
+
+template<typename T>
+Node<T>* AVL<T>::min(Node<T>* node) const
+{
+    if(node == nullptr)
+    {
+        return nullptr;
+    }
+
+    while(node->getLeft())
+    {
+        node = node->getLeft();
+    }
+
+    return node;
+}
+
+template<typename T>
+Node<T>* AVL<T>::max(Node<T>* node) const
+{
+    if(node == nullptr)
+    {
+        return nullptr;
+    }
+
+    while(node->getRight())
+    {
+        node = node->getRight();
     }
 
     return node;
