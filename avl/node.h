@@ -25,6 +25,9 @@ public:
     bool operator>(const Node<T>&) const;
     bool operator<(const Node<T>&) const;
     bool operator==(const Node<T>&) const;
+    bool operator>=(const Node<T>&) const;
+    bool operator<=(const Node<T>&) const;
+    bool operator!=(const Node<T>&) const;
 
     void printNode() const
     {
@@ -32,7 +35,7 @@ public:
     };
 
     template<class U>
-    friend std::__1::basic_ostream<char, std::__1::char_traits<char>>& operator<<(std::__1::basic_ostream<char, std::__1::char_traits<char>>&, const Node<U>&);
+    friend std::basic_ostream<char, std::char_traits<char>>& operator<<(std::basic_ostream<char, std::char_traits<char>>&, const Node<U>&);
 
     template<class U>
     friend std::istream& operator>>(std::istream&, Node<U>&);
@@ -76,6 +79,24 @@ template<class T>
 bool Node<T>::operator==(const Node<T>& other) const
 {
     return data == other.data;
+}
+
+template<class T>
+bool Node<T>::operator>=(const Node<T>& other) const
+{
+    return data >= other.data;
+}
+
+template<class T>
+bool Node<T>::operator<=(const Node<T>& other) const
+{
+    return data <= other.data;
+}
+
+template<class T>
+bool Node<T>::operator!=(const Node<T>& other) const
+{
+    return data != other.data;
 }
 
 template<class U>

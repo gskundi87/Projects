@@ -1,5 +1,7 @@
-#include "node.h"
+#include "avl.h"
+#include <stdlib.h>
 #include <string>
+#include <time.h>
 
 using namespace std;
 
@@ -8,6 +10,8 @@ void printTree(const Node<T>&);
 
 int main()
 {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
     cout << "Hello World!" << endl;
 
     cout << "TESTING NODE CLASS" << '\n';
@@ -27,7 +31,18 @@ int main()
 
     printTree<string>(y);
 
-    cout << "\nENDING TESTING NODE CLASS" << '\n';
+    cout << "\nENDING TESTING NODE CLASS\n";
+
+    cout << "\nSTARTING TESTING AVL CLASS\n";
+
+    AVL<int> tree{};
+
+    for(int i = 0; i < 10; ++i)
+    {
+        tree.insert(arc4random() % 100 + 1);
+    }
+
+    printTree<int>(*tree.getRoot());
 
     return 0;
 }
