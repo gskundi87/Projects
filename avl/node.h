@@ -15,8 +15,12 @@ private:
 public:
     Node();
     Node(const T& data) : data(data), left(nullptr), right(nullptr), parent(nullptr) {}
-    Node(const Node<T>& other) {
+    Node(const Node<T>& other)
+    {
         data = other.data;
+        left = other.left;
+        right = other.right;
+        parent = other.parent;
     }
 
     ~Node() {}
@@ -28,11 +32,6 @@ public:
     bool operator>=(const Node<T>&) const;
     bool operator<=(const Node<T>&) const;
     bool operator!=(const Node<T>&) const;
-
-    void printNode() const
-    {
-        std::cout << data << " ";
-    };
 
     template<class U>
     friend std::basic_ostream<char, std::char_traits<char>>& operator<<(std::basic_ostream<char, std::char_traits<char>>&, const Node<U>&);
@@ -56,8 +55,12 @@ public:
 template<class T>
 Node<T>& Node<T>::operator=(const Node<T>& other)
 {
-    if(this != &other) {
+    if(this != &other)
+    {
         data = other.data;
+        left = other.left;
+        right = other.right;
+        parent = other.parent;
     }
 
     return *this;
@@ -130,7 +133,7 @@ inline void Node<T>::setLeft(Node<T>* newLeft)
 template<class T>
 inline void Node<T>::resetLeft()
 {
-    setLeft(nullptr); // TODO: Adapt to use your actual default value
+    setLeft(nullptr);
 }
 
 template<class T>
@@ -148,7 +151,7 @@ inline void Node<T>::setRight(Node<T>* newRight)
 template<class T>
 inline void Node<T>::resetRight()
 {
-    setRight(nullptr); // TODO: Adapt to use your actual default value
+    setRight(nullptr);
 }
 
 template<class T>
@@ -166,13 +169,12 @@ inline void Node<T>::setParent(Node<T> *newParent)
 template<class T>
 inline void Node<T>::resetParent()
 {
-    setParent(nullptr); // TODO: Adapt to use your actual default value
+    setParent(nullptr);
 }
 
 template<class T>
 inline T Node<T>::getData() const {
     return data;
 }
-
 
 #endif // NODE_H

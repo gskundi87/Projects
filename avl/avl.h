@@ -2,6 +2,14 @@
 #define AVL_H
 
 #include "node.h"
+#include <algorithm>
+#include <cmath>
+#include <functional>
+#include <iomanip>
+#include <numeric>
+#include <string>
+#include <tuple>
+#include <vector>
 
 template<typename T>
 class AVL
@@ -18,6 +26,7 @@ class AVL
         Node<T>* next(Node<T>*) const;
         Node<T>* min(Node<T>*) const;
         Node<T>* max(Node<T>*) const;
+        std::string toString() const;
 
         static int getHeight(Node<T>*);
 
@@ -194,6 +203,67 @@ Node<T>* AVL<T>::max(Node<T>* node) const
 }
 
 template<typename T>
+std::string AVL<T>::toString() const
+{
+    if (root == nullptr) {
+        return "<empty tree>";
+    }
+
+    std::function<std::tuple<std::vector<std::string>, int, int>(const Node<T>*)> recurse =
+        [this, &recurse](const Node<T>* node) -> std::tuple<std::vector<std::string>, int, int> {
+        if (node == nullptr) {
+            return {{}, 0, 0};
+        }
+
+        std::string label = std::to_string(node->getData());
+        auto [left_lines, left_pos, left_width] = recurse(node->getLeft());
+        auto [right_lines, right_pos, right_width] = recurse(node->getRight());
+
+        int middle = std::max(right_pos + left_width - left_pos + 1, static_cast<int>(label.length()));
+        middle = std::max(middle, 2);
+        int pos = left_pos + middle / 2;
+        int width = left_pos + middle + right_width - right_pos;
+
+        while (left_lines.size() < right_lines.size()) {
+            left_lines.push_back(std::string(left_width, ' '));
+        }
+
+        while (right_lines.size() < left_lines.size()) {
+            right_lines.push_back(std::string(right_width, ' '));
+        }
+
+        if ((middle - label.length()) % 2 == 1 && node->getParent() != nullptr &&
+            node == node->getParent()->getLeft() && label.length() < middle) {
+            label += ".";
+        }
+
+        int padding_left = (middle - label.length()) / 2;
+        int padding_right = middle - label.length() - padding_left;
+
+        label = std::string(padding_left, '.') + label + std::string(padding_right, '.');
+
+        if (label[0] == '.') label = ' ' + label.substr(1);
+        if (label[label.length() - 1] == '.') label = label.substr(0, label.length() - 1) + ' ';
+
+        std::vector<std::string> lines{
+            std::string(left_pos, ' ') + label + std::string(right_width - right_pos, ' '),
+            std::string(left_pos, ' ') + '/' + std::string(middle - 2, ' ') + '\\' + std::string(right_width - right_pos, ' ')
+        };
+
+        for (size_t i = 0; i < left_lines.size(); ++i) {
+            std::string left_line = left_lines[i];
+            std::string right_line = right_lines[i];
+            lines.push_back(left_line + std::string(width - left_width - right_width, ' ') + right_line);
+        }
+
+        return {lines, pos, width};
+    };
+
+    auto [result, _, __] = recurse(root);
+    return std::accumulate(result.begin(), result.end(), std::string{}, [](const std::string& a, const std::string& b) { return a + '\n' + b; });
+}
+
+template<typename T>
 int AVL<T>::getHeight(Node<T>* node)
 {
     if(node == nullptr || (node->getLeft() == nullptr && node->getRight() == nullptr))
@@ -203,7 +273,5 @@ int AVL<T>::getHeight(Node<T>* node)
 
     return 1 + std::max(AVL<T>::getHeight(node->getLeft()), AVL<T>::getHeight(node->getRight()));
 }
-
-
 
 #endif // AVL_H

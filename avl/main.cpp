@@ -1,6 +1,5 @@
 #include "avl.h"
 #include <stdlib.h>
-#include <string>
 #include <time.h>
 
 using namespace std;
@@ -25,10 +24,6 @@ int main()
     y.setRight(&z);
     z.setParent(&y);
 
-    x.printNode();
-
-    cout << x << endl;
-
     printTree<string>(y);
 
     cout << "\nENDING TESTING NODE CLASS\n";
@@ -37,12 +32,16 @@ int main()
 
     AVL<int> tree{};
 
-    for(int i = 0; i < 10; ++i)
+    for(int i = 0; i < 50; ++i)
     {
-        tree.insert(arc4random() % 100 + 1);
+        tree.insert(arc4random() % 1000 + 1);
     }
 
     printTree<int>(*tree.getRoot());
+
+    cout << "\n\n";
+
+    cout << tree.toString();
 
     return 0;
 }
