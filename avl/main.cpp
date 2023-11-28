@@ -34,7 +34,7 @@ int main()
 
     for(int i = 0; i < 50; ++i)
     {
-        tree.insert(arc4random() % 1000 + 1);
+        tree.insert(rand() % 1000 + 1);
     }
 
     printTree<int>(*tree.getRoot());
@@ -42,6 +42,8 @@ int main()
     cout << "\n\n";
 
     cout << tree.toString();
+
+    cout << "\n\n";
 
     return 0;
 }

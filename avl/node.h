@@ -103,7 +103,7 @@ bool Node<T>::operator!=(const Node<T>& other) const
 }
 
 template<class U>
-std::__1::basic_ostream<char, std::__1::char_traits<char>>& operator<<(std::__1::basic_ostream<char, std::__1::char_traits<char>>& out, const Node<U>& obj)
+std::ostream& operator<<(std::ostream& out, const Node<U>& obj)
 {
     out << obj.data;
 
