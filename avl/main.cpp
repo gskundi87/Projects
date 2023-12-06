@@ -41,7 +41,17 @@ int main()
 
     cout << "\n\n";
 
-    cout << tree.toString();
+    cout << tree.printData();
+
+    cout << "\n\n";
+
+    cout << tree.printHeights();
+
+    cout << "\n\n";
+
+    tree.insert(500);
+
+    cout << tree.printData();
 
     cout << "\n\n";
 
