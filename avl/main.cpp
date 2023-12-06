@@ -1,4 +1,5 @@
 #include "avl.h"
+#include <limits>
 #include <stdlib.h>
 #include <time.h>
 
@@ -54,6 +55,27 @@ int main()
     cout << tree.printData();
 
     cout << "\n\n";
+
+    int loopInput;
+
+    while(true) {
+        cout << "Please input a number to remove from the tree above:\n>";
+        cin >> loopInput;
+
+        if(cin.fail() || loopInput <= 0) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+        }
+
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "\n\n";
+        tree.remove(loopInput);
+        cout << tree.printData();
+        cout << "\n\n";
+    }
 
     return 0;
 }

@@ -125,7 +125,7 @@ bool AVL<T>::remove(const T& data)
         minNode->getLeft()->setParent(minNode);
     }
 
-
+    return true;
 }
 
 template<typename T>
@@ -504,7 +504,7 @@ void AVL<T>::rotateRight(Node<T>* node)
 template<typename T>
 void AVL<T>::transplant(Node<T>* n1, Node<T>* n2)
 {
-    if(n1 != nullptr)
+    if(n1 == nullptr)
     {
         return;
     }
