@@ -1,9 +1,9 @@
 #include <iostream>
-
-using namespace std;
+#include "myVector_v2.h"
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    MyVector_v2<int> a;
+    std::cout << "Hello World!" << std::endl;
     return 0;
 }
