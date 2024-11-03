@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/p4u1/Documents/MIT_Projects/Projects/myVector_v2/build",
+  "command": "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\Llvm\\x64\\bin\\clang.exe -IC:/Users/p4u1/Documents/MIT_Projects/Projects/myVector_v2/build -IC:/Users/p4u1/Documents/MIT_Projects/Projects/myVector_v2 -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++17 -o CMakeFiles\\myVector_v2.dir\\main.cpp.obj -c C:\\Users\\p4u1\\Documents\\MIT_Projects\\Projects\\myVector_v2\\main.cpp",
+  "file": "C:\\Users\\p4u1\\Documents\\MIT_Projects\\Projects\\myVector_v2\\main.cpp",
+  "output": "CMakeFiles\\myVector_v2.dir\\main.cpp.obj"
+}
+]

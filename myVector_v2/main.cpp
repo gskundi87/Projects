@@ -1,9 +1,9 @@
 #include <iostream>
-#include "myVector_v2.h"
+#include "vector.h"
 
 int main()
 {
-    MyVector_v2<int> a;
+    Vector_Custom<int> a;
     std::cout << "Hello World!" << std::endl;
     return 0;
 }

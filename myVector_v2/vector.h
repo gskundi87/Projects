@@ -12,14 +12,35 @@ public:
     Vector_Custom(size_t size);
     Vector_Custom(size_t size, T value);
     Vector_Custom(const Vector_Custom& other);
-    Vector_Custom(Vector_Custom&& other);
+    Vector_Custom(Vector_Custom&& other) noexcept
+        : data(other.data), size(other.size), capacity(other.capacity) {
+        // Leave other in valid but empty state
+        other.data = nullptr;
+        other.size = 0;
+        other.capacity = 0;
+    }
+    Vector_Custom(std::initializer_list<T> list) : size(list.size()), capacity(size * 2) {
+        data = new T[capacity];
+        std::copy(list.begin(), list.end(), data);
+    };
     Vector_Custom& operator=(const Vector_Custom& other);
-    Vector_Custom& operator=(std::initializer_list list);
-    ~Vector_Custom();
+    Vector_Custom& operator=(std::initializer_list<T> list) {
+        Vector_Custom temp(list);
+        swap(temp);
+        return *this;
+    }
+    ~Vector_Custom() {
+        delete[] data;
+    }
 
     T& operator[](size_t index);
     const T& operator[](size_t index) const;
-
+    T& at(size_t);
+    const T& at(size_t) const;
+    T& front();
+    const T& front() const;
+    T& back();
+    const T& back() const;
 
 private:
     T* data;
@@ -65,6 +86,23 @@ Vector_Custom<T>& Vector_Custom<T>::operator=(const Vector_Custom<T>& other) {
     Vector_Custom<T> temp(other);
     swap(temp);
     return *this;
+}
+
+template <typename T>
+T& Vector_Custom<T>::at(size_t n) {
+    if(n > size) throw std::out_of_range("Index out of range");
+    return data[n];
+}
+
+template <typename T>
+const T& Vector_Custom<T>::at(size_t n) const {
+    if(n > size) throw std::out_of_range("Index out of range");
+    return data[n];
+}
+
+template <typename T>
+T& Vector_Custom<T>::front() {
+
 }
 
 template <typename T>
