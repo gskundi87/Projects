@@ -52,6 +52,7 @@ build cmake_object_order_depends_target_myVector_v2: phony || .
 build CMakeFiles/myVector_v2.dir/main.cpp.o: CXX_COMPILER__myVector_v2_unscanned_Debug /Users/p4u1/Documents/Projects/myVector_v2/main.cpp || cmake_object_order_depends_target_myVector_v2
   DEP_FILE = CMakeFiles/myVector_v2.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.1
+  INCLUDES = -I/Users/p4u1/Documents/Projects/build-myVector_v2-Desktop_arm_darwin_generic_mach_o_64bit-Debug -I/Users/p4u1/Documents/Projects/myVector_v2
   OBJECT_DIR = CMakeFiles/myVector_v2.dir
   OBJECT_FILE_DIR = CMakeFiles/myVector_v2.dir
 
